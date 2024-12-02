@@ -1,0 +1,6 @@
+.chevron {
+
+    &__container {
+        @apply flex justify-start flex-row bg-grey-charcoal pl-8 gap-36;
+    }
+}

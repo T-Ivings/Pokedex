@@ -1,0 +1,17 @@
+.banner {
+    @apply w-full h-[100vh] flex justify-center items-center;
+
+
+    &__squares {
+        @apply bg-[#212121] pt-[8.2rem] w-full;
+
+        background-image: linear-gradient(0deg, rgba(17, 17, 17) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(17, 17, 17) 2px, transparent 2px);
+        background-size: 32px 32px;
+    }
+
+    &__chevron-container {
+        @apply border-t-4 border-b-4 border-yellow-goldenrod w-full relative;
+
+    }
+}
