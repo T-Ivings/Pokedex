@@ -21,7 +21,8 @@ export default {
         },
         yellow: {
           goldenrod: "#CC8A02",
-          gold: "#CE8B05"
+          gold: "#CE8B05",
+          tulip: "#E8C630"
         }
       },
     },
