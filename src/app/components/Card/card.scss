@@ -1,5 +1,5 @@
 .card {
-    @apply min-w-full;
+    @apply min-w-full cursor-pointer;
     @apply ease-in-out transition-all duration-300;
     
     &__container {
