@@ -10,7 +10,7 @@ import pokeballBW from "../../../../public/pokeball-black-and-white.svg";
 import pokeballColour from "../../../../public/pokeball-colour.svg";
 
 
-export default function NameCard({ pokemonName, index }: { pokemonName: string; index: string }) {
+export default function NameCard({ pokemonName, index, onClick }: { pokemonName: string; index: string; onClick: void; }) {
   // const [pokemonCaughtState, setPokemonCaughtState] = useState(pokeballBW)
 
   // function addToCollection() {
@@ -24,7 +24,6 @@ export default function NameCard({ pokemonName, index }: { pokemonName: string; 
   //     },[pokemonCaughtState]) 
   //   }
   // }
-console.log(index)
   const classes = (index == "3" ? 'card active' : 'card'); 
 
     return (
