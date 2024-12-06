@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Button from "react";
 import NameCard from './NameCard';
 import "./card.scss"
 import jsonData from "../../scripts/pokemon.json";
@@ -47,10 +48,17 @@ const CardContainer = () => {
   useEffect(() => {
     [pokemonList] = getSurroundingStrings(jsonData, activeNumber);
   }, [activeNumber]);
+  const pokemonListUpdated = pokemonList.map((pokemon, index)=> {
+    if (index === 3) {
+      console.log(index, pokemon)
+    }
+  });
   
   return (
     <div className='card__container'>
-      {pokemonList.map((pokemon, index)=><NameCard key={index} pokemonName={pokemon} index={`${index}`} toggleFunction={handleCardClick()} />)}
+      {pokemonList.map((pokemon, index)=>
+      <NameCard key={index} pokemonName={pokemon} index={`${index}`} toggleFunction={handleCardClick()} />
+      )}
     </div>
   );
 };
