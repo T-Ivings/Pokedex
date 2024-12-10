@@ -10,7 +10,7 @@ import pokeballBW from "../../../../public/pokeball-black-and-white.svg";
 import pokeballColour from "../../../../public/pokeball-colour.svg";
 
 
-export default function NameCard({ pokemonName, index, onClick }: { pokemonName: string; index: string; onClick: void; }) {
+export default function NameCard({ pokemonName, index }: { pokemonName: string; index: number; }) {
   // const [pokemonCaughtState, setPokemonCaughtState] = useState(pokeballBW)
 
   // function addToCollection() {
@@ -24,7 +24,7 @@ export default function NameCard({ pokemonName, index, onClick }: { pokemonName:
   //     },[pokemonCaughtState]) 
   //   }
   // }
-  const classes = (index == "3" ? 'card active' : 'card'); 
+  const classes = (index == 3 ? 'active' : '');
 
     return (
       <div className={classes}>
@@ -34,9 +34,9 @@ export default function NameCard({ pokemonName, index, onClick }: { pokemonName:
             <Image className="scale-x-150 -ml-8 -my-3" src={hexagon} alt="" />
           </div>
           <div className="card__caught-info">
-          <button className='max-w-[90px]'>
+          <div className='max-w-[90px]'>
             <Svg imagePath={ pokeballBW }/>
-          </button>
+          </div>
         </div>
         <div className="card__content -ml-4 flex justify-center  text-xl lg:text-5xl -skew-x-12">
           <div className="my-auto whitespace-nowrap">{pokemonName}</div>
