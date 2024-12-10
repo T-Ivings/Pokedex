@@ -3,12 +3,13 @@ import React, {useEffect, useState} from 'react';
 import { PokemonClient } from 'pokenode-ts';
 
 const Prose = () => {
-    const [activePokemon, setActivePokemon] = useState(1); // Initial active number
+    const [activePokemon, setActivePokemon] = useState("Bulbasaur"); // Initial active number
 
     useEffect(() => {
-        setActivePokemon(document.querySelector('.active')?.innerHTML);
+      const currentPokemon = document.querySelector('.active')?.innerHTML;
+        setActivePokemon(currentPokemon!);
 
-        console.log(getCurrentPokemon)
+        console.log(activePokemon)
       });
 
 // `      const getPokemoncontent = (async () => {

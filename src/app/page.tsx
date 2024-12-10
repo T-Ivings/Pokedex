@@ -7,9 +7,7 @@ export default function Home() {
       <div className="w-full h-full relative overflow-y-hidden">
         <main>
           <MainBanner />
-          <div>
-            content here
-          </div>
+          <Prose/>
           <CardContainer />
             
         </main>
