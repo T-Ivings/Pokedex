@@ -45,4 +45,10 @@
 
 .active:hover {
     @apply scale-110;
+    @apply ease-in-out transition-all duration-300;
+
+}
+
+.loading {
+    cursor: wait !important;
 }
