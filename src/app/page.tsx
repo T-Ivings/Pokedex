@@ -1,12 +1,15 @@
-import Image from "next/image";
+import React, {useEffect} from "react";
 import MainBanner from "./components/Banner/MainBanner";
 import CardContainer from "./components/Card/CardContainer";
-
+import Prose from "./components/Prose/Prose"
 export default function Home() {
   return (
-      <div className="w-full h-full relative">
+      <div className="w-full h-full relative overflow-y-hidden">
         <main>
           <MainBanner />
+          <div>
+            content here
+          </div>
           <CardContainer />
             
         </main>
