@@ -1,63 +1,75 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Button from "react";
 import NameCard from './NameCard';
 import "./card.scss"
 import jsonData from "../../scripts/pokemon.json";
-
-interface CardContainerProps {
-  height: number;
-  isFirstLoop: boolean
-}
 
 const CardContainer = () => {
 
   interface data {
     [key: string]: string;
   }
+
+  function getKeyByValue(object: data, value: string): string | undefined {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
+  function getSurroundingIndexes(index: number): number[] {
+    const maxIndex = 1025;
+
+    // Normalize the index to a value between 1 and 1025
+    const normalizedIndex = ((index - 1) % maxIndex) + 1;
   
-  function getSurroundingStrings(data: typeof jsonData, targetNumber: number, count = 3): [string[]] {
-    const sortedKeys = Object.keys(data).map(Number).sort((a, b) => a - b);
-    const targetIndex = sortedKeys.indexOf(targetNumber);
+    const lowerBound = normalizedIndex - 3;
+    const upperBound = normalizedIndex + 3;
   
-    const lowerIndices: Array<number> = sortedKeys.slice(Math.max(0, targetIndex - count), targetIndex);
-    const higherIndices: Array<number> = sortedKeys.slice(targetIndex + 1, Math.min(sortedKeys.length, targetIndex + count + 1));
-
-    if (targetNumber === 1) {
-        lowerIndices.push(sortedKeys.length, sortedKeys.length - 1, sortedKeys.length - 2)
+    const numbers: number[] = [];
+    for (let i = lowerBound; i <= upperBound; i++) {
+      const normalizedNumber = i <= 0 ? maxIndex + i : i % maxIndex;
+      numbers.push(normalizedNumber);
     }
-    
-    if (targetNumber === sortedKeys.slice(sortedKeys.length - 1)[0]) {
-      higherIndices.push(1, 2, 3);
+    if (numbers.includes(0)) {
+      numbers[numbers.indexOf(0)] += 1025;
     }
-
-    const listOfPokemon = lowerIndices.map(key => data[key.toString()]).concat([data[(targetIndex + 1).toString()]], higherIndices.map(key => data[key.toString()])); 
-
+    return numbers;
+  }
+  
+  function getSurroundingStrings(data: typeof jsonData): [string[]] {
+    const listOfPokemon = getSurroundingIndexes(activeNumber).map((index) => { return data[index.toString()]}); 
     return [listOfPokemon];
   }
+
   const [activeNumber, setActiveNumber] = useState(1); // Initial active number
   
-  let [pokemonList]: [string[]] = getSurroundingStrings(jsonData, activeNumber)
+  let [pokemonList]: [string[]] = getSurroundingStrings(jsonData)
 
 
-  const handleCardClick = () => {
-  console.log("fucking work")  
+  const handleCardClick = (pokemon: string): void => {
+    setTimeout(() => {
+      setActiveNumber(Number(getKeyByValue(jsonData, pokemon)));
+      document.querySelectorAll('.card').forEach((card) => {
+        card.classList.remove('loading');
+        document.body.style.cursor = "pointer";
+      });
+    }, 2000);
+
+    document.body.style.cursor = "wait";
+    document.querySelectorAll('.card').forEach((card) => {
+      card.classList.add('loading');
+    });
 };
 
   useEffect(() => {
-    [pokemonList] = getSurroundingStrings(jsonData, activeNumber);
+    [pokemonList] = getSurroundingStrings(jsonData);
   }, [activeNumber]);
-  const pokemonListUpdated = pokemonList.map((pokemon, index)=> {
-    if (index === 3) {
-      console.log(index, pokemon)
-    }
-  });
   
   return (
-    <div className='card__container'>
+    <div className='card__container' >
       {pokemonList.map((pokemon, index)=>
-      <NameCard key={index} pokemonName={pokemon} index={`${index}`} toggleFunction={handleCardClick()} />
+      <button key={index} onClick={() => handleCardClick(pokemon)} className={'card'}>
+        <NameCard key={index} pokemonName={pokemon} index={index} />
+      </button>
       )}
     </div>
   );
