@@ -4,25 +4,26 @@ import { PokemonClient } from 'pokenode-ts';
 
 const Prose = () => {
     const [activePokemon, setActivePokemon] = useState("Bulbasaur"); // Initial active number
-
+    let pokemonData: string = "";
     useEffect(() => {
       const currentPokemon = document.querySelector('.active')?.innerHTML;
         setActivePokemon(currentPokemon!);
 
-        console.log(activePokemon)
       });
 
-// `      const getPokemoncontent = (async () => {
-//         const api = new PokemonClient();
-      
-//         await api
-//           .getPokemonByName('luxray')
-//           .then((data) => console.log(data.name)) // will output "Luxray"
-//           .catch((error) => console.error(error));
-//       })();
+      const getPokemonContent = (async () => {
+        const api = new PokemonClient();
+
+        await api
+
+          .getPokemonByName(activePokemon.toLowerCase())
+          .then((data) => {pokemonData = data.name}) // will output "Luxray"
+      })();
+
+      getPokemonContent
   return (
     <p className="absolute top-1/2 left-4">
-test
+      {pokemonData}
     </p>
   );
 };
