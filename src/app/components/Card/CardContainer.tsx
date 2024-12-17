@@ -68,7 +68,7 @@ const CardContainer = () => {
     <div className='card__container' >
       {pokemonList.map((pokemon, index)=>
       <button key={index} onClick={() => handleCardClick(pokemon)} className={'card'}>
-        <NameCard key={index} pokemonName={pokemon} index={index} />
+        <NameCard key={index} pokemonName={pokemon} index={index} pokemonNumber={Number(getKeyByValue(jsonData, pokemon)).toString()} />
       </button>
       )}
     </div>
